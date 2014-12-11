@@ -62,8 +62,10 @@ final class DispInterfaceGenerator extends InvocableInterfaceGenerator<IDispInte
                 o.println("@PropGet");
                 break;
             case PROPERTYPUT:
-            case PROPERTYPUTREF:
                 o.println("@PropPut");
+                break;
+            case PROPERTYPUTREF:
+                o.println("@PropPutRef");
                 break;
             }
         }

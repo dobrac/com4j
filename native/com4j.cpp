@@ -65,7 +65,7 @@ JNIEXPORT jobject JNICALL Java_com4j_Native_invokeDispatch( JNIEnv* env, jclass 
   // see MSDN IDispatch::Invoke
   // "When you use IDispatch::Invoke() with DISPATCH_PROPERTYPUT or DISPATCH_PROPERTYPUTREF, you have to specially
   //  initialize the cNamedArgs and rgdispidNamedArgs elements of your DISPPARAMS structure with the following:"
-	if(flag==DISPATCH_PROPERTYPUT || flag==DISPATCH_PROPERTYPUTREF) {
+	if( (flag&DISPATCH_PROPERTYPUT)!=0 || (flag&DISPATCH_PROPERTYPUTREF)!=0 ) {
 		params.cNamedArgs = 1;
 		params.rgdispidNamedArgs = &dispIdPropertyPut;
 	}

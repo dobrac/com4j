@@ -30,8 +30,15 @@ final class DispatchComMethod extends ComMethod {
     private int getFlag() {
         PropGet get = method.getAnnotation(PropGet.class);
         PropPut put = method.getAnnotation(PropPut.class);
+        PropPutRef putRef = method.getAnnotation(PropPutRef.class);
+
         if(get!=null && put!=null)
             throw new IllegalAnnotationException("@PropPut and @PropGet are mutually exclusive: "+method.toGenericString());
+        if(get!=null && putRef!=null)
+            throw new IllegalAnnotationException("@PropPutRef and @PropGet are mutually exclusive: "+method.toGenericString());
+
+        if(putRef!=null)
+            return DISPATCH_PROPERTYPUT | DISPATCH_PROPERTYPUTREF;
         if(get!=null)
             return DISPATCH_PROPERTYGET;
         if(put!=null)
@@ -56,6 +63,5 @@ final class DispatchComMethod extends ComMethod {
     private static final int DISPATCH_METHOD         = 0x1;
     private static final int DISPATCH_PROPERTYGET    = 0x2;
     private static final int DISPATCH_PROPERTYPUT    = 0x4;
-    @SuppressWarnings("unused")
     private static final int DISPATCH_PROPERTYPUTREF = 0x8;
 }
